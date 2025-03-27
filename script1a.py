@@ -14,16 +14,16 @@ create_bond_table_query = """ CREATE TABLE IF NOT EXISTS movies (
                         Avg_User_IMDB REAL)
                         """
 
-# Corrected the add_movie_query syntax
+
 add_movie_query = """ INSERT INTO movies
                        (Year, Movie, Bond, Avg_User_IMDB)
-                       VALUES (?, ?, ?, ?);"""  # Added closing parenthesis and corrected the syntax
+                       VALUES (?, ?, ?, ?);""" 
 
-# Corrected the new_movie tuple syntax
+
 new_movie = (2027, 
               'Bond by Amazon',
               'TBD',
-              0.0)  # Changed '0' to 0.0 to match the REAL type
+              0)  
 
 # Execute the SQL query to create the 'movies' table.
 cur.execute(create_bond_table_query)
@@ -47,16 +47,16 @@ all_movies = cur.fetchall()
 # Pretty print the results
 pprint(all_movies)
 
-# Commit (save) pending transactions to the database.
+# Committed (save) pending transactions to the database.
 con.commit()
 
-# Close the database connection.
+# Closed the database connection.
 con.close()
 
-# Read the movies from the database into a DataFrame and print it
+# Read the movies from the database into a DataFrame and printed it
 # Note: You need to reopen the connection to read from the database again
 con = sqlite3.connect('bond_movies.db')
 print(pd.read_sql_query('SELECT * FROM movies', con))
 
-# Close the connection again
+# Closed the connection again
 con.close()
